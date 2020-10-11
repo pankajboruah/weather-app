@@ -5,7 +5,6 @@
 </template>
 
 <script>
-import "../src/assets/sass/main.scss";
 import WeatherCard from "./components/WeatherCard";
 export default {
   name: "app",
