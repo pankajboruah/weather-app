@@ -68,6 +68,11 @@ export default {
       required: true,
       default: 0
     },
+    selectedDay: {
+      type: Number,
+      required: true,
+      default: 0
+    },
     currentTemp: { type: Number, required: true, default: 25 },
     currentWeather: { type: String, required: true, default: "Rainy" }
   },
@@ -121,7 +126,10 @@ export default {
     },
     temperatureData() {
       return {
-        labels: this.horizontalAxis.filter((el, i) => i > this.currentHour),
+        labels:
+          this.selectedDay == 0
+            ? this.horizontalAxis.filter((el, i) => i > this.currentHour)
+            : this.horizontalAxis,
         datasets: [
           {
             label: "Temperature",
