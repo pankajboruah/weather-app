@@ -117,28 +117,11 @@ export default {
       } else {
         console.log("geolocation is not enabled on this browser");
       }
-    },
-    getCurrentLocation() {
-      fetch("https://freegeoip.app/json/")
-        .then(res => {
-          if (res.status == 200) {
-            return res.json();
-          }
-        })
-        .then(data => {
-          if (data) {
-            this.currentCity.coord.lat = data.latitude;
-            this.currentCity.coord.lon = data.longitude;
-            this.currentCity.name = data.city;
-          }
-        })
-        .catch(err => console.log(err));
     }
   },
   mounted() {
     this.getCurrentTime();
     this.getGeoLocation();
-    this.getCurrentLocation();
   }
 };
 </script>

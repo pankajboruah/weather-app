@@ -133,6 +133,7 @@ export default {
     },
     weatherIcon() {
       switch (this.currentWeather) {
+        case "Mist":
         case "Rain":
           return "/dist/rainy.svg?a19df7e92b35ec3af9eeac4c6d5efb84";
         case "Haze":
