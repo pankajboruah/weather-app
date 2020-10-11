@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import "../src/assets/sass/main.scss";
 import WeatherCard from "./components/WeatherCard";
 export default {
   name: "app",
@@ -30,7 +31,7 @@ export default {
 }
 
 body {
-  font-family: Roboto,sans-serif;
+  font-family: Roboto, sans-serif;
   box-sizing: border-box;
   color: #000101;
   padding: 1rem;
@@ -44,11 +45,11 @@ input {
 }
 
 p {
-    display: block;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
 }
 h1,
 h2 {
@@ -75,5 +76,11 @@ a {
 
 .text-lighter {
   color: #919393;
+}
+
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+  #app {
+    width: 100%;
+  }
 }
 </style>

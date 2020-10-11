@@ -1,11 +1,16 @@
 <template>
   <section class="SearchBar_searchListContainer">
-    <div class="SearchList_searchListItem" v-for="(city,idx) in cities" :key="idx" @click="selectCity(city)">
-      <span>{{city.name}}</span>
+    <div
+      class="SearchList_searchListItem"
+      v-for="(city, idx) in cities"
+      :key="idx"
+      @click="selectCity(city)"
+    >
+      <span>{{ city.name }}</span>
       <div class="weatherMeta">
         <div class="temperature">
-          <span>32° C</span>
-          <span class="text-lighter">Smoke</span>
+          <span>{{ city.temp || 28 }}° C</span>
+          <span class="text-lighter">{{ city.weather || "Rain" }}</span>
         </div>
         <img
           class="SearchList_weatherIcon"
@@ -19,16 +24,20 @@
 <script>
 export default {
   name: "SearchItem",
+  data() {
+    return {
+      isLoading: false
+    };
+  },
   props: {
     cities: {
-			type: Array,
+      type: Array,
       default: ["Mumbai"],
       required: true
-		}
+    }
   },
   methods: {
-    selectCity(city){
-      console.log("selected", city.name)
+    selectCity(city) {
       this.$emit("handleCityChange", city);
     }
   }
@@ -60,7 +69,7 @@ export default {
   width: 40px;
   margin-left: 0.5rem;
 }
-.weatherMeta{
+.weatherMeta {
   display: flex;
   justify-content: space-between;
 }
@@ -68,5 +77,4 @@ export default {
   display: flex;
   flex-direction: column;
 }
-
 </style>

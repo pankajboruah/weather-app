@@ -88,6 +88,8 @@ export default {
     }
   }
   &__desc {
+    position: relative;
+    top: 50px;
     margin-top: 60px;
     font-size: 32px;
     font-weight: 300;
