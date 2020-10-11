@@ -1,11 +1,10 @@
 <template>
   <section class="DetailedForecast_detailedContainer">
     <div class="DetailedForecast_currentTempContainer">
-      <h1 class="DetailedForecast_currentTemp">29° C</h1>
-      <img
-        class="DetailedForecast_currentTempIcon"
-        src="../../assets/icons/rainy.svg"
-      />
+      <h1 class="DetailedForecast_currentTemp">
+        {{ Math.floor(currentTemp) }}° C
+      </h1>
+      <img class="DetailedForecast_currentTempIcon" :src="weatherIcon" />
     </div>
     <tempChart
       width="736"
@@ -68,7 +67,9 @@ export default {
       type: Number,
       required: true,
       default: 0
-    }
+    },
+    currentTemp: { type: Number, required: true, default: 25 },
+    currentWeather: { type: String, required: true, default: "Rainy" }
   },
   data() {
     return {
@@ -104,6 +105,9 @@ export default {
           {
             label: "Sunrise",
             backgroundColor: "#fcf5e4",
+            pointBackgroundColor: "white",
+            borderWidth: 1,
+            pointBorderColor: "#249EBF",
             data: [0, 0, 1, 0, 0]
           }
         ]
@@ -126,6 +130,17 @@ export default {
           }
         ]
       };
+    },
+    weatherIcon() {
+      switch (this.currentWeather) {
+        case "Rain":
+          return "/dist/rainy.svg?a19df7e92b35ec3af9eeac4c6d5efb84";
+        case "Haze":
+        case "Clouds":
+          return "/dist/cloudy.svg?849e970e8ff7fb60320f9e3172b721b4";
+        case "Clear":
+          return "/dist/sunny.svg?edade9d6a9ccb6debdd73dde536773ad";
+      }
     }
   }
 };

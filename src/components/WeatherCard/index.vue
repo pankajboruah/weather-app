@@ -27,6 +27,8 @@
         :selectedDay="selectedDay"
         :humidity="cityWeatherForecast.current.humidity"
         :pressure="cityWeatherForecast.current.pressure"
+        :currentTemp="cityWeatherForecast.current.temp"
+        :currentWeather="cityWeatherForecast.current.weather[0].main"
       ></DetailedForecastCard>
     </div>
   </div>
@@ -78,32 +80,32 @@ export default {
     updateDay(value) {
       this.selectedDay = value;
     },
-    getCityData(lat, lon) {
-      fetch(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=59aee9fd3658db1644f57f5fe0218034`
-      )
-        .then(res => {
-          if (res.status == 200) {
-            return res.json();
-          }
-        })
-        .then(data => {
-          if (data) {
-            this.currentCity = data.name;
-          }
-        })
-        .catch(err => console.log(err));
-    },
+    // getCityData(lat, lon) {
+    //   fetch(
+    //     `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=59aee9fd3658db1644f57f5fe0218034`
+    //   )
+    //     .then(res => {
+    //       if (res.status == 200) {
+    //         return res.json();
+    //       }
+    //     })
+    //     .then(data => {
+    //       if (data) {
+    //         this.currentCity = data.name;
+    //       }
+    //     })
+    //     .catch(err => console.log(err));
+    // },
     getGeoLocation() {
       if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(
           function success(position) {
-            console.log(
-              "latitude",
-              position.coords.latitude,
-              "longitude",
-              position.coords.longitude
-            );
+            // console.log(
+            //   "latitude",
+            //   position.coords.latitude,
+            //   "longitude",
+            //   position.coords.longitude
+            // );
           },
           function error(error_message) {
             console.error(
