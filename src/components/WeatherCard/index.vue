@@ -25,10 +25,12 @@
         :hourlyData="computedHourlyData"
         :currentHour="currentHour"
         :selectedDay="selectedDay"
-        :humidity="cityWeatherForecast.current.humidity"
-        :pressure="cityWeatherForecast.current.pressure"
-        :currentTemp="cityWeatherForecast.current.temp"
-        :currentWeather="cityWeatherForecast.current.weather[0].main"
+        :humidity="cityWeatherForecast.daily[selectedDay].humidity"
+        :pressure="cityWeatherForecast.daily[selectedDay].pressure"
+        :currentTemp="
+          Math.floor(cityWeatherForecast.daily[selectedDay].temp.max)
+        "
+        :currentWeather="cityWeatherForecast.daily[selectedDay].weather[0].main"
       ></DetailedForecastCard>
     </div>
   </div>
