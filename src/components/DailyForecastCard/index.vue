@@ -49,7 +49,8 @@ export default {
       return this.value == this.selectedDay ? "active" : "";
     },
     dayOfWeek() {
-      switch (this.value) {
+      const today = new Date().getDay();
+      switch ((today + this.value) % 7) {
         case 0:
           return "Sun";
         case 1:
@@ -76,12 +77,16 @@ export default {
     },
     weatherIcon() {
       switch (this.day.weather) {
+        case "Mist":
         case "Rain":
           return "/dist/rainy.svg?a19df7e92b35ec3af9eeac4c6d5efb84";
+        case "Haze":
         case "Clouds":
           return "/dist/cloudy.svg?849e970e8ff7fb60320f9e3172b721b4";
         case "Clear":
           return "/dist/sunny.svg?edade9d6a9ccb6debdd73dde536773ad";
+        default:
+          return "/dist/rainy.svg?a19df7e92b35ec3af9eeac4c6d5efb84";
       }
     }
   },

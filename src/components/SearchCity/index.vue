@@ -19,25 +19,28 @@
         ></path>
       </svg>
     </button>
-    <SearchItems
-      :cities="filteredCities"
-      @handleCityChange="updateCity"
-      v-if="isSearching"
-    />
+    <section class="SearchBar_searchListContainer" v-if="isSearching">
+      <SearchItem
+        v-for="(city, idx) in filteredCities"
+        :key="idx"
+        :city="city"
+        @handleCityChange="updateCity"
+      />
+    </section>
   </div>
 </template>
 
 <script>
 import location from "../../assets/icons/location.svg";
 import magnifyingGlass from "../../assets/icons/magnifyingGlass.svg";
-import SearchItems from "../SearchItems";
+import SearchItem from "../SearchItem";
 import cities from "../../assets/cities.json";
 export default {
   name: "SearchCity",
   components: {
     location,
     magnifyingGlass,
-    SearchItems
+    SearchItem
   },
   data() {
     return {
@@ -57,30 +60,13 @@ export default {
         this.isSearching = false;
         return;
       }
-      this.filteredCities = this.cities.filter(city =>
-        city.name.toLowerCase().includes(this.cityName.toLowerCase())
-      );
-      // this.filteredCities.forEach((city, idx) => this.getCityData(city, idx));
+      this.filteredCities = JSON.parse(JSON.stringify(this.cities))
+        .filter(city => {
+          return city.name.toLowerCase().includes(this.cityName.toLowerCase());
+        })
+        .map(city => this.emboldenSubstring(city));
       this.isSearching = true;
     },
-    // getCityData(city, idx) {
-    //   fetch(
-    //     `https://api.openweathermap.org/data/2.5/weather?lat=${city.coord.lat}&lon=${city.coord.lon}&units=metric&appid=59aee9fd3658db1644f57f5fe0218034`
-    //   )
-    //     .then(res => {
-    //       if (res.status == 200) {
-    //         return res.json();
-    //       }
-    //     })
-    //     .then(data => {
-    //       if (data) {
-    //         this.filteredCities[idx].temp = Math.floor(data.main.temp);
-    //         this.filteredCities[idx].weather = data.weather[0].main;
-    //       }
-    //     })
-    //     .catch(err => console.log(err))
-    //     .finally(() => (this.isSearching = false));
-    // },
     getCurrentLocation() {
       fetch("https://freegeoip.app/json/")
         .then(res => {
@@ -119,9 +105,19 @@ export default {
           }
         })
         .catch(err => console.log(err));
+    },
+    emboldenSubstring(city) {
+      city.name = city.name
+        .toLowerCase()
+        .replace(this.cityName, this.cityName.bold());
+      if (city.name[0] == "<") {
+        city.name = city.name.replace(city.name[3], city.name[3].toUpperCase());
+      } else {
+        city.name = city.name.replace(city.name[0], city.name[0].toUpperCase());
+      }
+      return city;
     }
-  },
-  computed: {}
+  }
 };
 </script>
 
@@ -162,5 +158,15 @@ export default {
   right: 4rem;
   top: 1rem;
   margin: 0;
+}
+.SearchBar_searchListContainer {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 2px 8px -3px;
+  position: absolute;
+  top: 110%;
+  left: 0;
+  right: 0;
+  z-index: 10;
 }
 </style>

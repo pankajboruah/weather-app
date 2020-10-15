@@ -9,42 +9,10 @@ export default {
     },
     width: {
       type: String | Number
+    },
+    options: {
+      type: Object
     }
-  },
-  data() {
-    return {
-      options: {
-        aspectRatio: 2,
-        scales: {
-          yAxes: [
-            {
-              ticks: {
-                beginAtZero: false
-              },
-              gridLines: {
-                display: true
-              }
-            }
-          ],
-          xAxes: [
-            {
-              ticks: {
-                beginAtZero: false,
-                stepSize: 1.5
-              },
-              gridLines: {
-                display: false
-              }
-            }
-          ]
-        },
-        legend: {
-          display: false
-        },
-        responsive: true,
-        maintainAspectRatio: false
-      }
-    };
   },
   mounted() {
     this.renderChart(this.chartData, this.options);
