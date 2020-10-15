@@ -182,10 +182,12 @@ export default {
                 beginAtZero: false,
                 stepSize: 1.5,
                 sampleSize: 6
-                // maxRotation: 10
               },
               gridLines: {
-                display: true
+                display: true,
+                lineWidth: 3,
+                zeroLineWidth: 3,
+                zeroLineColor: "#e5e5e5"
               }
             }
           ]
@@ -294,7 +296,7 @@ export default {
   margin-bottom: 2rem;
   > .DetailedForecast_graph {
     height: 250px;
-    width: 1200px;
+    width: 1400px;
   }
 }
 .DetailedForecast_currentTempIcon {
