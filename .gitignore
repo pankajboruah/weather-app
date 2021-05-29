@@ -3,6 +3,7 @@ node_modules/
 dist/
 npm-debug.log
 yarn-error.log
+src/assets/apikey.json
 
 # Editor directories and files
 .idea
